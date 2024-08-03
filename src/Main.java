@@ -1,14 +1,16 @@
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
         findMinMax(Stream.empty(), Comparator.naturalOrder(),(min, max) ->
                 System.out.println("min = " + min + " max = " + max));
-        task2Stream();
+        task2Stream(Arrays.asList(1, 2, 5, 8, 7, 2, 1, 5, 9, 6, 3, 4));
     }
 
     public static void findMinMax(Stream<? extends Integer> stream,
@@ -24,7 +26,10 @@ public class Main {
         }
     }
 
-    private static void task2Stream() {
-        Stream.iterate(2,i -> i+2).limit(20).forEach(System.out::println);
+    private static void task2Stream(List<Integer> numbers) {
+        numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .collect(Collectors.toList())
+                .forEach(System.out::println);
     }
 }
